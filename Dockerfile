@@ -94,5 +94,5 @@ RUN chown -R ${USER_NAME}:${GROUP_NAME} /var/www && \
   chown -R ${USER_NAME}:${GROUP_NAME} /tmp
 
 #USER ${USER_NAME}
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["entrypoint.sh"]
