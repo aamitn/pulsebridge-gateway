@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  pulsebridge-gateway-app:
+    image: nmpl/pulsebridge:latest
+    # build:
+      # context: .
+    container_name: pulsebridge-gateway
+    networks:
+      - pulsebridge-network
+    ports:
+      - "80:80"
+
+networks:
+  pulsebridge-network:
+    driver: bridge

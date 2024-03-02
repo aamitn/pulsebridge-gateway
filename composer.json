@@ -1,0 +1,21 @@
+{
+  "name": "nmpl/pulsebridge",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Amit Nandi",
+      "email": "amit@bitmutex.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"nmpl\\pulsebridge\\": "src/"}
+  },
+  "require-dev": {
+    "phpunit/phpunit": "11.0.3"
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
