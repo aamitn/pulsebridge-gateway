@@ -239,20 +239,29 @@ class Pulsebridge
    *
    * @return bool true on success, false if folder is not available
    */
-  public function setDataPath(
-    $data_path
-  ) {
-    if (file_exists($data_path)) {
-      if (substr($data_path, -strlen(DIRECTORY_SEPARATOR)) != DIRECTORY_SEPARATOR) {
-        $data_path.= DIRECTORY_SEPARATOR;
-      }
-      $this->DataPath = $data_path;
-      return true;
-    } else {
-      return false;
-    }
-  }
+    public function setDataPath($dataPath)
+    {
+        // Ensure the path ends with DIRECTORY_SEPARATOR
+        if (substr($dataPath, -strlen(DIRECTORY_SEPARATOR)) !== DIRECTORY_SEPARATOR) {
+            $dataPath .= DIRECTORY_SEPARATOR;
+        }
 
+        // Check if the data folder exists, and create it if not
+        if (!file_exists($dataPath) || !is_dir($dataPath)) {
+            // Create the data folder with 0755 permissions (you can adjust this based on your needs)
+            mkdir($dataPath, 0755, true);
+
+            // Check if the folder creation was successful
+            if (!file_exists($dataPath) || !is_dir($dataPath)) {
+                throw new \RuntimeException("Failed to create data folder: $dataPath");
+            }
+        }
+
+        // Set the data path
+        $this->DataPath = $dataPath;
+
+        return true;
+    }
   /**
    * Get the flat-file data path
    *
