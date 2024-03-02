@@ -42,6 +42,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN mkdir -p /var/www/html/logs && \
     chown -R www-data:www-data /var/www/html/logs
 
+# Create a data storage directory
+RUN mkdir -p /var/www/html/data && \
+    chown -R www-data:www-data /var/www/html/data
+
 
 # Set working directory
 WORKDIR $WORKDIR
