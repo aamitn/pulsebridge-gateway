@@ -1,4 +1,5 @@
 ## PulseBridge Gateway Server
+[![buddy pipeline](https://app.buddy.works/amitnandileo-2/pulsebridge-gateway/pipelines/pipeline/485432/badge.svg?token=fb16d4ceb25aaee899aeebeb8f9d57239dd800defc2afb65a0176c36d32bd464 "buddy pipeline")](https://app.buddy.works/amitnandileo-2/pulsebridge-gateway/pipelines/pipeline/485432)
 
 Welcome to the PulseBridge Gateway Server repository! This server acts as an SMS Gateway powered by the PulseBridge library.The PulseBridge Gateway Server is a powerful SMS Gateway software that allows you to send SMS messages seamlessly. Whether you're looking to integrate SMS functionality into your web applications or send messages from a centralized server, PulseBridge Gateway makes the process efficient and straightforward.
 
