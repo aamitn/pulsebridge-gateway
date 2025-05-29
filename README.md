@@ -19,7 +19,7 @@ Source for Mobile Client App here : [PulseBridge App](https://github.com/aamitn/
 
 Follow these three simple steps to get started with PulseBridge Gateway:
 
-1.  **Run PulseBridge Gateway Server App and click `setup credentials` button.  
+1.  **Run PulseBridge Gateway Server App and click `setup credentials` button.**  
     Clone the repository, install dependencies, and run the server locally or using Docker Compose using the below instructions.[Building and Running Locally](#building-and-running-locally)
 2.  [**Download**](https://app.download#) **PulseBridge Mobile App and set the URL in app provided by the server.**
 3.  **Send SMS from the Server Frontend or API**
