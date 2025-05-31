@@ -12,7 +12,7 @@ Source for Mobile Client App here : [PulseBridge App](https://github.com/aamitn/
 *   [Building and Running Locally](#building-and-running-locally)
 *   [Running with Docker Compose](#running-with-docker-compose)
 *   [Manually Spinning Up Your Own Image](#manually-spinning-up-your-own-image)
-*   [Licecnse](#license)
+*   [License](#license)
 *   [Contribution](#contribution)
 
 ## Getting Started
