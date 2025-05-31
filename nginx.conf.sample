@@ -27,7 +27,10 @@ server {
     ssl_certificate         /etc/ssl/cert_cf.pem;
     ssl_certificate_key     /etc/ssl/key_cf.pem;
     ssl_prefer_server_ciphers on;
-
+    
+    #Logging
+    access_log /var/log/nginx/sms.access.log;
+    error_log /var/log/nginx/sms.error.log;
     
 
     # Handle PHP scripts
