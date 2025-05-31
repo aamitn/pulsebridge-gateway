@@ -9,9 +9,9 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
 } else {
     require_once __DIR__ . '/Logger.php';
-    require_once __DIR__ . '/Pulsebridge.php';
-    require_once __DIR__ . '/PageRenderer.php';
 }
+  require_once __DIR__ . '/Pulsebridge.php';
+  require_once __DIR__ . '/PageRenderer.php';
 class Driver
 {
     private $logger;
