@@ -99,7 +99,8 @@ Fork the repository and create your branch:
 2.  Make your changes and commit them:
 
     ```bash
-    git add . git commit -m "Add your feature"
+    git add . 
+    git commit -m "Add your feature"
     ```
 4.  Push to your fork and submit a pull request.
 5.  Follow the code review process.
