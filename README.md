@@ -31,21 +31,28 @@ Follow these three simple steps to get started with PulseBridge Gateway:
 
 1.  **Clone the Repository:**
 
-    ```plaintext
+    ```bash
     git clone https://github.com/aamitn/pulsebridge-gateway.git
     cd pulsebridge-gateway  
     ```
 
-2.  **Install Dependencies:**  
+2.  **Change Ownership:**
+
+    ```bash
+    sudo chown -R www-data:www-data /path/to/pulsebridge-gateway/
+    ```
+
+
+3.  **Install Dependencies:**  
     `*install composer from instructions here :` [`Composer (getcomposer.org)`](https://getcomposer.org/download/)
 
-    ```plaintext
+    ```bash
     composer install
     ```
 
-3.  **Run the Server: \[run the dev server or copy the directory contents to web server of your choice\]**
+4.  **Run the Server: \[run the dev server or copy the directory contents to web server of your choice\]**
 
-    ```plaintext
+    ```bash
     php -S localhost:8000 -t public
     ```
 
@@ -86,16 +93,14 @@ This project is licensed under the [MIT License](https://chat.openai.com/c/LICEN
 Contributions are welcome! If you'd like to contribute to PulseBridge Gateway, please follow our [Contribution Guidelines](https://chat.openai.com/c/CONTRIBUTING.md).  
 Fork the repository and create your branch:
 
-1.  bashCopy code
-
-    `git clone https://github.com/aamitn/pulsebridge-gateway.git cd pulsebridge-gateway git checkout -b feature/your-feature`
-
+1.  ```bash
+    git clone https://github.com/aamitn/pulsebridge-gateway.git cd pulsebridge-gateway git checkout -b feature/your-feature
+    ```
 2.  Make your changes and commit them:
 
-    bashCopy code
-
-    `git add . git commit -m "Add your feature"`
-
-3.  Push to your fork and submit a pull request.
-4.  Follow the code review process.
-5.  Your contribution will be merged once approved.
+    ```bash
+    git add . git commit -m "Add your feature"
+    ```
+4.  Push to your fork and submit a pull request.
+5.  Follow the code review process.
+6.  Your contribution will be merged once approved.
