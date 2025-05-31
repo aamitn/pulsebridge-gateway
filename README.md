@@ -1,8 +1,14 @@
 ## PulseBridge Gateway Server
+
+<img src="./resources/logo.svg" alt="pulsebridge-logo" align="left">
+
 [![buddy pipeline](https://app.buddy.works/amitnandileo-2/pulsebridge-gateway/pipelines/pipeline/485432/badge.svg?token=fb16d4ceb25aaee899aeebeb8f9d57239dd800defc2afb65a0176c36d32bd464 "buddy pipeline")](https://app.buddy.works/amitnandileo-2/pulsebridge-gateway/pipelines/pipeline/485432)
 
-Welcome to the PulseBridge Gateway Server repository! This server acts as an SMS Gateway powered by the PulseBridge library.The PulseBridge Gateway Server is a powerful SMS Gateway software that allows you to send SMS messages seamlessly. Whether you're looking to integrate SMS functionality into your web applications or send messages from a centralized server, PulseBridge Gateway makes the process efficient and straightforward.
+Welcome to the PulseBridge Gateway Server repository! With the[PulseBridge Server](https://github.com/aamitn/pulsebridge-gateway) and  [PulseBridge Andropid App](https://github.com/aamitn/pulsebridge-app) you can send SMS from your own applications using the API, by utilizing your own mobile phone as the sender, thereby avoiding costly paid services like Twillio. The PulseBridge Gateway Server is a powerful SMS Gateway software that allows you to send SMS messages seamlessly.
 
+>It is as simple as GET https://sms.bitmutex.com?id={deviceid}&h={devicehash}&to={receiver_num}&message={msg_content}
+
+<img src="./resources/ss.png" alt="pulsebridge-logo" width="500">
 
 Source for Mobile Client App here : [PulseBridge App](https://github.com/aamitn/pulsebridge-app)
 
