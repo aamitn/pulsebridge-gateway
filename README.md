@@ -44,7 +44,7 @@ Follow these three simple steps to get started with PulseBridge Gateway:
 
 
 3.  **Install Dependencies:**  
-    `*install composer from instructions here :` [`Composer (getcomposer.org)`](https://getcomposer.org/download/)
+    `install composer from instructions here :` [`Composer (getcomposer.org)`](https://getcomposer.org/download/)
 
     ```bash
     composer install
