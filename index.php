@@ -1,11 +1,23 @@
 <?php
-namespace nmpl\pulsebridge;
+namespace Nmpl\Pulsebridge;
+
+// Use Composer autoload if available, otherwise import manually from src
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+} else {
+    require_once __DIR__ . '/src/Driver.php';
+    require_once __DIR__ . '/src/Logger.php';
+}
+
+// Declare global variable for skip flag file
+$skipFlagFile = __DIR__ . '/.skip_composer';
 
 class App
 {
-
     public function dependencyInstaller(): void
     {
+        global $skipFlagFile; // Make the global variable available here
+
         // Check if the autoload.php file exists
         $autoloadPath = __DIR__ . '/vendor/autoload.php';
 
@@ -66,17 +78,29 @@ class App
                 echo '</div>';
             }
 
-            echo "<hr style='border-color: #3498db; margin: 20px 0;'>";
-
             // Step2: Install App
             echo "<h3 style='color: #2c3e50;'>Step 2: Install Application</h3>";
-
             echo "<p style='font-size: 16px; color: #2c3e50;'>Once Composer is installed, run <strong>composer install</strong> in your terminal or click the button below:</p>";
 
             // Output a professional-looking HTML button that triggers another shell command when clicked
             echo '<form id="executeForm" method="post">';
             echo '<input type="submit" name="executeCommand" value="Install Application" style="background-color: #3498db; color: #fff; padding: 10px 15px; border: none; cursor: pointer; font-size: 16px; border-radius: 5px;">';
             echo '</form>';
+
+            echo "<hr style='border-color: #3498db; margin: 20px 0;'>";
+
+            // SKIP Composer 
+            echo "<h3 style='color: #2c3e50;'>SKIP COMPOSER INSTALL</h3>";
+            echo "<p style='font-size: 16px; color: #2c3e50;'>If your hosting <strong>does not support ssh access / php exec() function</strong> then click the button below:</p>";
+
+            // Show skip button if composer is not installed and flag file not set
+            if (!file_exists(__DIR__ . '/vendor/autoload.php') && !file_exists($skipFlagFile)) {
+                echo '<form method="post" style="text-align:center; margin-top:20px;">
+                    <input type="submit" name="skipComposer" value="Skip Composer & Run App" style="background-color: #e67e22; color: #fff; padding: 10px 15px; border: none; cursor: pointer; font-size: 16px; border-radius: 5px;">
+                </form>';
+            }
+
+            echo "<hr style='border-color: #3498db; margin: 20px 0;'>";
 
             // Output PHP version and server info
             echo "<p style='font-size: 16px; margin-top: 20px; color: #2c3e50;'>Server Information: " . $_SERVER['SERVER_SOFTWARE'] . "</p>";
@@ -151,5 +175,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['executeCommand'])) {
     </script>';
 }
 
-$app->dependencyInstaller();
+// Check for skipComposer POST or permanent flag file
+$skipComposer = (
+    ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['skipComposer']))
+    || file_exists($skipFlagFile)
+);
+
+// If skipComposer button is clicked, create the flag file
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['skipComposer'])) {
+    file_put_contents($skipFlagFile, '1');
+}
+
+// If skipComposer is true, skip the dependency installation
+if (!$skipComposer) {
+    $app->dependencyInstaller();
+}
+
+// Run the application
 $app->run();

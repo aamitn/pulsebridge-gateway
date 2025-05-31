@@ -9,10 +9,12 @@
  * Pulsebridge PHP class
  *
  * https://github.com/multiOTP/SMSGateway
+ * https://github.com/aamitn/pulsebridge-gateway
  *
  * The Pulsebridge PHP class is a flat-file based SMS gateway for sending and
  *  receiving SMS on an Android device using an open source SMS Gateway app.
  *  (https://github.com/medic/cht-gateway)
+ *  (https://github.com/aamitn/pulsebridge-app)
  *
  * The Readme file contains additional information.
  *
@@ -123,10 +125,12 @@ namespace Nmpl\Pulsebridge;
 /**
  * Pulsebridge - flat-file based SMS gateway PHP class using an open source Android app
  *
- * @author Andre Liechti (SysCo systemes de communication sa) <info@multiotp.net>
+ * @author Amit Kumar Nandi (Bitmutex Technologies) <support@bitmutex.com>
  */
-require __DIR__ . '/../vendor/autoload.php';
 
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+} 
 class Pulsebridge
 {
   /**

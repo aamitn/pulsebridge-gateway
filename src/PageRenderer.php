@@ -2,7 +2,18 @@
 
 namespace Nmpl\Pulsebridge;
 
-require __DIR__ . '/../vendor/autoload.php';
+// Remove Composer autoload
+// require __DIR__ . '/../vendor/autoload.php';
+
+
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+} else {
+    // Manually require dependencies
+    require_once __DIR__ . '/Pulsebridge.php';
+    require_once __DIR__ . '/Logger.php';
+}
+
 
 class PageRenderer
 {
@@ -109,7 +120,7 @@ class PageRenderer
 
     echo '<div class="container mt-4">';
 		echo '<h1 class="mt-4 display-4 text-center">PulseBridge<sup style="font-size: 30px;">' . $smsgateway->getVersion() . '</sup></h1>';
-      echo '<p class="mt-4 display-4 text-center" style="font-size: large;">SMS gateway web-application with an HTTP interface to connect with a PulseBridge android <a href="#">app</a> and send/receive SMS. </p>';
+      echo '<p class="mt-4 display-4 text-center" style="font-size: large;">SMS gateway web-application with an HTTP interface to connect with a PulseBridge android <a href="https://github.com/aamitn/pulsebridge-app/releases">app</a> and send/receive SMS. </p>';
 		echo '<p class="mt-4 display-4 text-center" style="font-size: small;">App Version: ' . $smsgateway->getVersion() . '</p>';
 		echo '<hr>';
 	}
@@ -117,68 +128,105 @@ class PageRenderer
 public static function renderFooter()
 {
     echo '</div>'; // Close the container div
-echo '<footer class="mt-5 text-center">
-        <div class="row">
-            <div class="col">
-                <strong>Server Time:</strong> <span id="serverTime"></span> -
-                <strong>Client Time:</strong> <span id="clientTime"></span>
+
+    // Footer Start
+    echo '<footer class="mt-5 text-center">';
+
+    // Footer CTA App Download Link
+    echo '
+        <div class="d-flex justify-content-center align-items-center my-4" style="gap: 28px;">
+            <div>
+                <span style="
+                    font-size: 1.35rem;
+                    font-weight: 600;
+                    color: #1a237e;
+                    letter-spacing: 0.5px;
+                    background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    display: inline-block;
+                    padding: 4px 0 4px 0;
+                    ">
+                    <i class="fas fa-mobile-alt" style="color:#0072ff; margin-right:8px;"></i>
+                    Get the <span style="color:#0072ff;">PulseBridge</span> Android App
+                </span>
+                <div style="font-size: 0.98rem; color: #333; margin-top: 4px;">
+                    Ditch Twillio! with the PulseBridge gateway and app, send SMS messages directly from your Android phone.
+                </div>
             </div>
+            <a href="https://github.com/aamitn/pulsebridge-app/releases/" target="_blank" rel="noopener" style="display:inline-block;">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                    alt="Get it on Google Play"
+                    style="height:64px; margin-bottom:0; box-shadow:0 4px 16px rgba(0,114,255,0.12); border-radius:10px;">
+            </a>
         </div>
-        <div class="row">
-            <div class="col">
-                <strong>PHP Run Mode:</strong> ' . php_sapi_name() . '
-				   <strong>Web Server:</strong> ' . $_SERVER['SERVER_SOFTWARE'] .
-          (function_exists('apache_get_version') ? apache_get_version() : '') . '
+    ';
+
+    // Footer server and client time, PHP run mode, and web server information
+    echo '<div class="row">
+                <div class="col">
+                    <strong>Server Time:</strong> <span id="serverTime"></span> -
+                    <strong>Client Time:</strong> <span id="clientTime"></span>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col">
+                    <strong>PHP Run Mode:</strong> ' . php_sapi_name() . '
+                    <strong>Web Server:</strong> ' . $_SERVER['SERVER_SOFTWARE'] .
+            (function_exists('apache_get_version') ? apache_get_version() : '') . '
+                </div>
+            </div>';
 
-        <div class="row">
-            <div class="col">
-					<hr>
-                <small class="text-muted">Pulsebridge - Bitmutex Technologies &copy; ' . date("Y") . '</small>
+        //Footer copyright and year
+        echo  '<div class="row">
+                <div class="col">
+                        <hr>
+                    <small class="text-muted">Pulsebridge - Bitmutex Technologies &copy; ' . date("Y") . '</small>
+                </div>
             </div>
-        </div>
-      </footer>';
-    echo '<script>
-            function updateServerTime() {
-                var currentTime = new Date();
-                var hours = currentTime.getHours();
-                var minutes = currentTime.getMinutes();
-                var seconds = currentTime.getSeconds();
+        </footer>';
 
-                // Add leading zero if needed
-                minutes = (minutes < 10 ? "0" : "") + minutes;
-                seconds = (seconds < 10 ? "0" : "") + seconds;
+        //Time Update JS
+        echo '<script>
+                function updateServerTime() {
+                    var currentTime = new Date();
+                    var hours = currentTime.getHours();
+                    var minutes = currentTime.getMinutes();
+                    var seconds = currentTime.getSeconds();
 
-                var formattedTime = hours + ":" + minutes + ":" + seconds;
-                document.getElementById("serverTime").innerHTML = formattedTime;
-            }
+                    // Add leading zero if needed
+                    minutes = (minutes < 10 ? "0" : "") + minutes;
+                    seconds = (seconds < 10 ? "0" : "") + seconds;
 
-            function updateClientTime() {
-                var currentTime = new Date();
-                var hours = currentTime.getHours();
-                var minutes = currentTime.getMinutes();
-                var seconds = currentTime.getSeconds();
+                    var formattedTime = hours + ":" + minutes + ":" + seconds;
+                    document.getElementById("serverTime").innerHTML = formattedTime;
+                }
 
-                // Add leading zero if needed
-                minutes = (minutes < 10 ? "0" : "") + minutes;
-                seconds = (seconds < 10 ? "0" : "") + seconds;
+                function updateClientTime() {
+                    var currentTime = new Date();
+                    var hours = currentTime.getHours();
+                    var minutes = currentTime.getMinutes();
+                    var seconds = currentTime.getSeconds();
 
-                var formattedTime = hours + ":" + minutes + ":" + seconds;
-                document.getElementById("clientTime").innerHTML = formattedTime;
-            }
+                    // Add leading zero if needed
+                    minutes = (minutes < 10 ? "0" : "") + minutes;
+                    seconds = (seconds < 10 ? "0" : "") + seconds;
 
-            // Update server time every second
-            setInterval(updateServerTime, 1000);
+                    var formattedTime = hours + ":" + minutes + ":" + seconds;
+                    document.getElementById("clientTime").innerHTML = formattedTime;
+                }
 
-            // Update client time every second
-            setInterval(updateClientTime, 1000);
+                // Update server time every second
+                setInterval(updateServerTime, 1000);
 
-            // Initial updates
-            updateServerTime();
-            updateClientTime();
-        </script>';
-    echo '</body></html>';
+                // Update client time every second
+                setInterval(updateClientTime, 1000);
+
+                // Initial updates
+                updateServerTime();
+                updateClientTime();
+            </script>';
+        echo '</body></html>';
 }
 
 }
@@ -520,7 +568,7 @@ elseif (empty($device_id) || ("i" == $command)) {
 	$outputSent .= '<button class="btn btn-outline-info" type="button" onclick="copyToClipboard()">Copy URL</button>';
 	$outputSent .= '</div>';
 	$outputSent .= '<small class="text-muted">Click "Copy URL" to copy the configuration URL to the clipboard.</small><br>';
-     $outputSent .= '<small class="text-muted">Open Pulsebridge <a href="#">app</a> -> Settings -> Paste url to pulsebride url field</small>';
+     $outputSent .= '<small class="text-muted">Open Pulsebridge <a href="https://github.com/aamitn/pulsebridge-app/releases/">app</a> -> Settings -> Paste url to pulsebride url field</small>';
 
 	$outputSent .= '</div>';
 	$outputSent .= '<div class="col-md-6">';
